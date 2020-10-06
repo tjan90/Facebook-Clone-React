@@ -16,7 +16,18 @@ const Feed = () => {
                 username='User'
                 />
 
-            {
+            {/*
+            postsData.map(entry =>{
+                <Post
+                profilePic={entry.avatar}
+                message='{entry.text}'
+                timeStamp='{entry.timestamp}'
+                Name='{entry.imgName}'
+                username='{entry.user}'
+                />
+            })
+            
+            */
 
             }
         </div>

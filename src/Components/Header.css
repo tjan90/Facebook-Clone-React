@@ -41,7 +41,7 @@
     cursor: pointer;
 }
 .header__option:hover{
-    background-color: #b3b5b6;
+    
     border-radius: 10px;
     align-items: center;
     padding: 0 30px;
