@@ -2,10 +2,10 @@ import React from 'react'
 import {Avatar} from '@material-ui/core'
 import './Story.css'
 
-const Story = (image, profileSrc, title) => {
+const Story = ({image, profileSrc, title}) => {
     return (
-        <div style = {{backgrounfImage:'url(${image})'}} className='story'>
-            <Avatar src={profileSrc} className='story_avatar'/>
+        <div style = {{backgroundImage: `url(${image})`}} className='story'>
+            <Avatar src={profileSrc} className='story__avatar'/>
             <h4>{title}</h4>
         </div>
     )
