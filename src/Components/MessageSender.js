@@ -1,23 +1,74 @@
 import React from 'react'
-import {Avatar, Button, Input} from '@material-ui/core'
+import {Avatar} from '@material-ui/core'
 import VideocamIcon from '@material-ui/icons/Videocam'
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary'
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import {useState} from 'react'
 import './MessageSender.css'
+import firebase from 'firebase'
+import {useStateValue} from '../StateProvider'
+import db from '../firebase'
+import axios from '../axios'
+import FormData from 'form-data'
 
 const MessageSender = () => {
     const [input, setInput] = useState('')
     const [image, setImage] = useState(null)
+    const [imageUrl, setImageUrl] = useState('')
+    const [{user}, dispatch] = useStateValue()
+
+    console.log(user)
     const handleChange= (e) => {
+        console.log('handle change')
         if (e.target.files[0]){
             setImage(e.target.files[0])
         }
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async(e) => {
         console.log('submitting')
+        e.preventDefault()
+        // db.collection('posts').add({
+        //     message: input,
+        //     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        //     profilePic: user.photoURL,
+        //     username: user.displayName,
+        //     image: imageUrl
+        // })
+        if(image){
+            const imgForm = new FormData()
+            imgForm.append('file', image,image.name)
+            axios.post('/upload/image', imgForm,{
+                headers:{
+                    'accept':'application/json',
+                    'Accept-Language':'en-US,en;q=0.8',
+                    'Content-Type':`multipart/form-data; boundry=${imgForm._boundry}`,
+                }
+            }).then((response) => {
+                console.log(response.data)
+                const postData = {
+                    text: input,
+                    imgName: response.data.filename,
+                    user: user.displayName,
+                    avatar: user.photoURL,
+                    timestamp: Date.now()
+                }
+                console.log(postData)
+                savePost(postData)
+            })
+            
+        }
+        setImage(null)
+        setInput('')
+        setImageUrl('')
     }
+
+    const savePost = async(postData) => {
+        await axios.post('/upload/post', postData).then((response)=>{
+            console.log(response)
+        })
+    }
+    
     return (
         <div className='messageSender'>
             <div className='messageSender__top'>

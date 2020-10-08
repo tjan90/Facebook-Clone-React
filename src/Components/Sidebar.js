@@ -9,10 +9,12 @@ import LocalHospitalIcon from '@material-ui/icons/LocalHospital'
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary'
 import ExpandMoreOutlined from '@material-ui/icons/ExpandMoreOutlined'
 import SidebarRow from './SidebarRow'
+import {useStateValue} from '../StateProvider'
 const Sidebar = () => {
+    const [{user}, dispatch] = useStateValue()
     return (
         <div>
-            <SidebarRow src = 'pic' title='user'/>
+            <SidebarRow src = {user.photoURL} title={user.displayName}/>
             <SidebarRow Icon={LocalHospitalIcon} title='Covid-19 Information'/>
             <SidebarRow Icon={EmojiFlagsIcon} title='Pages'/>
             <SidebarRow Icon={PeopleIcon} title='Friends'/>

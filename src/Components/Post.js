@@ -23,6 +23,15 @@ const Post = ({profilePic, Name, username, timeStamp, message}) => {
             <div className='post__bottom'>
                 {message}
             </div>
+            {
+                Name ? (
+                    <div className='post__image'>
+                        <img src={`http://localhost:9000/retrieve/images/single?name=${Name}`}/>
+                    </div>
+                ) : (
+                    console.log('DEBUG >>> no image here' )
+                )
+            }
 
             <div className='post__options'>
                         <div className='post__option'>
