@@ -9,7 +9,8 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 
 
 
-const Post = ({profilePic, Name, username, timeStamp, message}) => {
+const Post = ({profilePic, imgName, username, timeStamp, message}) => {
+    console.log(timeStamp)
     return (
         <div className='post'>
             <div className='post__top'>
@@ -24,9 +25,9 @@ const Post = ({profilePic, Name, username, timeStamp, message}) => {
                 {message}
             </div>
             {
-                Name ? (
+                imgName ? (
                     <div className='post__image'>
-                        <img src={`http://localhost:9000/retrieve/images/single?name=${Name}`}/>
+                        <img src={`http://localhost:9000/retrieve/image/single?name=${imgName}`}/>
                     </div>
                 ) : (
                     console.log('DEBUG >>> no image here' )

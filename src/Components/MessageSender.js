@@ -39,33 +39,43 @@ const MessageSender = () => {
             const imgForm = new FormData()
             imgForm.append('file', image,image.name)
             axios.post('/upload/image', imgForm,{
-                headers:{
+                headers: {
                     'accept':'application/json',
                     'Accept-Language':'en-US,en;q=0.8',
                     'Content-Type':`multipart/form-data; boundry=${imgForm._boundry}`,
                 }
             }).then((response) => {
                 console.log(response.data)
-                const postData = {
+                const postsData = {
                     text: input,
                     imgName: response.data.filename,
                     user: user.displayName,
                     avatar: user.photoURL,
                     timestamp: Date.now()
                 }
-                console.log(postData)
-                savePost(postData)
+                console.log('Saved')
+                savePost(postsData)
             })
             
+        }else{
+            const postsData = {
+                text: input,
+                user: user.displayName,
+                avatar: user.photoURL,
+                timestamp: Date.now()
+            }
+            console.log('Saved')
+            savePost(postsData)
         }
         setImage(null)
         setInput('')
         setImageUrl('')
     }
 
-    const savePost = async(postData) => {
-        await axios.post('/upload/post', postData).then((response)=>{
+    const savePost = async(postsData) => {
+        await axios.post('/upload/post', postsData).then((response)=>{
             console.log(response)
+            console.log('Save-Function')
         })
     }
     
