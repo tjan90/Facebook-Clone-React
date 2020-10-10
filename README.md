@@ -1,6 +1,6 @@
 ## Facebook Clone 
 
-![image](https://raw.githubusercontent.com/tjan90/Facebook-Clone-React/master/Screenshot 2020-10-10 at 11.06.19 AM.png)
+![image](https://raw.githubusercontent.com/tjan90/Facebook-Clone-React/master/screenshot.png)
 
 ### Stack
  - ReactJS
